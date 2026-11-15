@@ -1,0 +1,31 @@
+[
+    {
+        "id": "autopsy_report",
+        "name": "Cindy's Autopsy Report",
+        "image": "assets/images/P1.png",
+        "desc_lines": [
+            "Time of death: 7/31, 4PM - 5PM",
+            "Cause of death: loss of blood",
+            "due to blunt trauma."
+        ]
+    },
+    {
+        "id": "passport",
+        "name": "Victim's Passport",
+        "image": "assets/images/P2.png",
+        "desc_lines": [
+            "Owner: Cindy Stone",
+            "Last country visited: Japan",
+            "Visa status: Valid"
+        ]
+    },
+    {
+        "id": "electric",
+        "name": "Electric interview",
+        "image": "assets/images/P3.png",
+        "desc_lines": [
+            "a",
+            "b"
+        ]
+    }
+]

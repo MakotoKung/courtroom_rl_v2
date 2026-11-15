@@ -1,0 +1,343 @@
+[
+    {
+                "bg": "assets/images/judge/bg004.png",
+                "speaker": "Judge",
+                "text": "ศาลเปิดทำการพิจารณาคดีแล้ว",
+                "visible": ["Judge"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"ขณะนี้เรากำลังจะพิจารณาดีของคุณแอน อเมริกาโนฉด ฝ่ายโจทก์และจำเลยพร้อมไหม?",
+                "visible":["Judge"]
+            },
+            {
+                "bg": "assets/images/bg002.png",
+                "speaker": "Payne",
+                "text": "ฝ่ายโจทย์พร้อมแล้วครับ ท่านผู้พิพากษา",
+                "visible": ["Payne"]
+            },
+            {
+                "bg": "assets/images/bg001.png",  
+                "speaker": "Phoenix",
+                "text": "ฝั่งจำเลยพร้อมแล้วครับ",
+                "visible": ["Phoenix"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"เอาละ เรามาเริ่มกันเลย",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"เหยื่อถูกทำร้ายด้วยของไม่มีคม",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"คุณช่วยอธิบาย”วัตถุ”นั้นให้ศาลหน่อย อัยการดา",
+                "visible":["Judge"]
+            },
+            {
+                "bg": "assets/images/bg002.png",
+                "speaker": "Payne",
+                "text": "อาวุธที่ใช้ฆาตกรรมกรรมคือ “รูปปั้นนักคิด”ครับ",
+                "visible": ["Payne"],
+                "image":"assets/images/P1.png",
+                "pos": [300,300]
+
+            },
+            {
+                "bg": "assets/images/bg002.png",
+                "speaker": "Payne",
+                "text": "ซึ้งตกอยู่บนพื้น ข้างศพของผู้ตายครับ",
+                "visible": ["Payne"],
+                "image":"assets/images/P1.png",
+                "pos": [300,300]
+
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"เข้าใจแล้ว ศาลได้รับเอกสารแล้วล่ะ",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"คุณแอน จริงหรือไม่ที่คุณเพิ่งจะเลิกกับเหยื่อไป",
+                "visible":["Payne"],
+                "image":"assets/images/P1.png",
+                "pos": [300,300]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Larry",
+                "text":"คุณพูดอะไรออกมา เรารักกันปานจะกลืนกิน",
+                "visible":["Larry"]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Larry",
+                "text":"เราไม่เคยเลิกกัน เธอแค่ไม่รับโทรศัพท์ และไม่ตอบข้อความผมต่างหาก",
+                "visible":["Larry"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"คุรแอน สิ่งที่คุณพูดเมื่อสักครู่เป็นการบ่งบอกถึงการ”ถูกทิ้ง”นะครับ",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ผมว่าเธอคงมีผู้ชายใหม่ไปแล้วนะครับ",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Larry",
+                "text":"คุณโกหก เป็นไปไม่ได้",
+                "visible":["Larry"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ศาลที่เคารพ เมื่อหนึ่งวันก่อนเสียชีวิต เราได้พบพาสปอร์ตการไปปารีสของเธอ",
+                "visible":["Payne"],
+                "image":"assets/images/P2.png",
+                "pos":[300,250]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ศาลที่เคารพ เหยื่อเป็นนางแบบและมีรายได้ไม่มากนัก",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"และดูเหมือนว่าเธอจะมี “Sugar dadies” คอยช่วยเหลือเธอ",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Larry",
+                "text":" “Sugar dadies” เป็นไปได้ไง ..",
+                "visible":["Larry"],
+                "action": "emm"
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ทีนี้คุณน่าจะรู้นิสัยของแฟนตัวเองคร่าวๆละนะ ในตอนนี้คุณคิดยังไงกับแฟนสาวของตัวเอง",
+                "visible":["Payne"]
+            },
+            {
+                "bg": "assets/images/bg001.png",  
+                "speaker": "Phoenix",
+                "text": "ศาลที่เคารพครับ ผมคิดว่าคำถามนี้ ไม่น่าเกี่ยวกับคดีนะครับ",
+                "visible": ["Phoenix"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"ศาลเห็นชอบ อัยการโปรดถามคำถามที่เกี่ยวข้องด้วยครับ",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ได้ครับ ผมขอเบิกพยานเพื่อพิสูจน์ว่าคุณแอนโกหก",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"โกหกงั้นหรอ ??",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"นี้คือคุณปอง เป็นคนส่งหนังสือพิมพ์รายวันใช่ไหมครับ",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"โอ้ หนังสือพิมพ์ ใช่ครับ ใช่",
+                "visible":["Frank"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"คุรปอง ลองเล่าเหตุการณ์วันนั้นที่คุณเห็นให้ศาลฟังหน่อย",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/frank/bg02a.png",
+                "speaker":"Frank",
+                "text":"วันนั้นผมส่งหนังสือพิมพ์ให้แต่ละบ้าน แล้วเห็นผู้ชายคนนึงวิ่งออกมา",
+                "visible":[]
+            },
+            {
+                "bg":"assets/images/frank/bg02b.png",
+                "speaker":"Frank",
+                "text":"แล้วผมก็เห็น ผู้หญิงคนนึงนอนอยู่ที่พื้น",
+                "visible":[]
+            },
+            {
+                "bg":"assets/images/frank/bg02b.png",
+                "speaker":"Frank",
+                "text":"ผมตัวสั่นด้วยความหวานกลัว และผมก็ตระหนักว่าไม่ควรเข้าไป",
+                "visible":[]
+            },
+            {
+                "bg":"assets/images/frank/bg02b.png",
+                "speaker":"Frank",
+                "text":"ก็เลยโทรแจ้งตำรวจครับ แต่โทรศัพท์ในห้องไม่สามารถใช้งานได้",
+                "visible":[]
+            },
+            {
+                "bg":"assets/images/frank/bg02b.png",
+                "speaker":"Frank",
+                "text":"ผมก็เลยรีบวิ่งไปที่โทรศัพท์สาธารณะ",
+                "visible":[]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"เท่าที่จำได้เป้นเวลา 13.00 ครับศาลที่เคารพ",
+                "visible":["Frank"]
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"ชายที่วิ่งออกไป คือจำเลยที่นั่งอยู่ตรงนั้นโดยไม่ต้องสงสัย",
+                "visible":["Frank"]
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"หืมม ทำไมถึงโทรศัพท์ในห้องใช้ไม่ได้ล่ะ",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"วันนั้นมีการซ่อมแซมไฟฟ้าในตึกครับ",
+                "visible":["Payne"]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ศาลที่เคารพ ผมมีใบแจ้งการซ่อมมาด้วยครับ",
+                "visible":["Payne"],
+                "image":"assets/images/P3.png",
+                "pos":[300,250]
+
+            },
+            {
+                "bg":"assets/images/judge/bg004.png",
+                "speaker":"Judge",
+                "text":"เอาล่ะ ทนายได้เวลาที่คุณจะ ซักถาม ได้แล้ว",
+                "visible":["Judge"]
+            },
+            {
+                "bg":"assets/images/bg001.png",
+                "speaker":"Phoenix",
+                "text":"ครับท่าน!!",
+                "visible":["Phoenix"]
+            },
+            {
+                "bg":"assets/images/bg001.png",
+                "speaker":"Phoenix",
+                "text":"คุณปอง 13.00 งั้นหรอ คุณมั่นใจแล้วหรอ",
+                "visible":["Phoenix"]
+            },
+            {
+                "bg": "assets/images/judge/bg004.png",
+                "speaker": "Judge",
+                "text": "มีหลักฐานอะไรมายืนยันเรื่องนี้ไหม?",
+                "visible": ["Judge"],
+                "expects_evidence": true,
+                "correct_evidence_id": "autopsy_report",
+                "on_correct_jump": 42,
+                "on_wrong_jump": 40
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"",
+                "visible":["Frank"],
+                "image":"assets/images/etc00au.png",
+                "size":[1000,700],
+                "pos":[600, 350]
+            },
+            {
+                
+                "bg":"assets/images/bg001.png",
+                "speaker":"Phoenix",
+                "text":"คุณบอกว่า คุณเจอศพตอน 1.00 แต่รายงานิติเวชบอกว่า ผู้ตายเสียชีวิตตอน 16.00",
+                "visible":["Phoenix"],
+                "action":"paper"
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"เอ่ออ.. ผมน่าจะจำผิดน่ะครับ",
+                "visible":["Frank"]
+                
+            },
+            {
+                
+                "bg":"assets/images/bg001.png",
+                "speaker":"Phoenix",
+                "text":"ช่วงเวลามันคลาดเคลื่อนกันมากเกินไป คุณจะอธิบายเวลาที่ต่างกัน 3 ชั่วโมงยังไง",
+                "visible":["Phoenix"],
+                "action":"talking"
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"เอ่ออ.. ผมน่าจะเห็นให้บนโทรทัศน์",
+                "visible":["Frank"]
+                
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"",
+                "visible":["Frank"],
+                "image":"assets/images/etc00au.png",
+                "size":[1000,700],
+                "pos":[600, 350]
+            },
+            {
+                "bg":"assets/images/bg002.png",
+                "speaker":"Payne",
+                "text":"ศาลที่เคารพ พยานอาจจะจำเวลาที่คลาดเคลื่อน",
+                "visible":["Payne"],
+                "action":"hah"
+            }, 
+            {
+                "bg": "assets/images/judge/bg004.png",
+                "speaker": "Judge",
+                "text": "สิ่งนี้ยากเกินที่จะเชื่อนะ อัยการ",
+                "visible": ["Judge"]
+                
+            },
+            {
+                "bg":"assets/images/bg003.png",
+                "speaker":"Frank",
+                "text":"โอ้ ผมจำได้แล้วครับ",
+                "visible":["Frank"]
+                
+            }
+            
+
+]
