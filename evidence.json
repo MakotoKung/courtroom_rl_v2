@@ -1,31 +1,60 @@
 [
     {
         "id": "autopsy_report",
-        "name": "Cindy's Autopsy Report",
+        "name": "รูปปั้นนักคิด",
         "image": "assets/images/P1.png",
         "desc_lines": [
-            "Time of death: 7/31, 4PM - 5PM",
-            "Cause of death: loss of blood",
-            "due to blunt trauma."
+            "Time of death: 31 ก.ค. เวลาเสียชีวิต 16.00-17.00 น.",
+            "สาเหตุการเสียชีวิต: เลือดออกจำนวนมาก",
+            "กลุ้มเครียด"
         ]
     },
     {
         "id": "passport",
-        "name": "Victim's Passport",
+        "name": "พาสสปอร์ตของผู้ตาย",
         "image": "assets/images/P2.png",
         "desc_lines": [
-            "Owner: Cindy Stone",
-            "Last country visited: Japan",
-            "Visa status: Valid"
+            "เจ้าของ: Cindy Stone",
+            "ประเทศล่าสุดที่ไป : ฝรั่งเศส",
+            "สถานะวีซ่า: อนุมัติ"
         ]
     },
     {
         "id": "electric",
-        "name": "Electric interview",
+        "name": "ใบประกาศซ่อมแซ่มไฟฟ้า",
         "image": "assets/images/P3.png",
         "desc_lines": [
-            "a",
-            "b"
+            "ใบขออภัยความไม่สะดวกในการใช้ไฟฟ้า",
+            "เนื่องจากต้องเข้าไปซ่อมแซม"
+        ]
+    },
+    {
+        "id": "ใบวินิจฉัย",
+        "name": "รางานนิติเวช",
+        "image": "assets/images/P4.png",
+        "desc_lines": [
+            "เวลาเสียชีวิต 16.00 น.",
+            "บาดแผลบริเวณศรีษะ"
+        ]
+    },
+    {
+        "id": "เข็ม",
+        "name": "เข็มทนายความ",
+        "image": "assets/images/P5.png",
+        "desc_lines": [
+            "เข็มวงกลมที่มีตราศาลอยู่ตรงกลาง",
+            "ไม่ค่อยเกี่ยวข้องเท่าไหร่"
+        ]
+    },
+    {
+        "id": "picture",
+        "name": "ภาพถ่ายที่เกิดเหตุ",
+        "image": "assets/images/P6.png",
+        "desc_lines": [
+            "ภาพถ่ายจากกล้องวงจรปิด",
+            "ที่เห็นชาย 2 คน",
+            "ใครกันที่โกหก"
         ]
     }
+    
 ]

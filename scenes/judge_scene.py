@@ -24,11 +24,12 @@ class judge(BaseDialogueScene):
         payne_anim.add_action("hah", "assets/images/payne/payne_hah.png",total_frames=4,duration=200,custom_width=115,custom_height=120)
         payne_anim.play_ani("talking",loop=True)
         payne_anim.set_scale(4)
-        self.add_character("Payne", payne_anim, x=800, y= SCREEN_HEIGHT - 500)
+        self.add_character("Payne", payne_anim, x=800, y= SCREEN_HEIGHT - 480)
 
         phoenix_ani = CharacterAnimator(char_name="Phoenix")
         phoenix_ani.add_action("talking", "assets/images/phoenix/Phoenix_talk.png",total_frames=4, duration=130, custom_width=135)
-        phoenix_ani.add_action("paper", "assets/images/phoenix/Phonix_paper2.png",total_frames=6, duration=200, custom_width=174)
+        phoenix_ani.add_action("paper", "assets/images/phoenix/Phoenix_paper2.png",total_frames=6, duration=220, custom_width=180)
+        phoenix_ani.add_action("finger", "assets/images/phoenix/Phoenix_finger.png",total_frames=1, duration=100, custom_width=260)
         phoenix_ani.play_ani("talking", loop=True)
         phoenix_ani.set_scale(4)
         self.add_character("Phoenix", phoenix_ani, x=200, y= SCREEN_HEIGHT-500)
@@ -42,10 +43,17 @@ class judge(BaseDialogueScene):
 
         frank = CharacterAnimator(char_name="Frank")
         frank.add_action("talking", "assets/images/frank/frank_talk2.png",total_frames=4,duration=200,custom_width=102)
+        frank.add_action("angry", "assets/images/frank/frank_angry.png",total_frames=4, duration=220, custom_width=110)
         frank.play_ani("talking",loop=True)
         frank.set_scale(4)
         self.add_character("Frank",frank,x= 400, y= SCREEN_HEIGHT -500)
         # 2. กำหนด Script บทพูดทั้งหมด (รองรับการสลับฉากหลัง bg ระหว่างคุยได้อิสระ)
+        
+        clock = CharacterAnimator(char_name="Clock")
+        clock.add_action("talking", "assets/images/frank/frank_talk2.png",total_frames=4,duration=200,custom_width=102)
+        self.add_character("Clock",clock,x= 400, y= SCREEN_HEIGHT -500)
+
+        
         script_path = "dialogue/judge_scene.json"
 
         # ต้องใส่ encoding="utf-8" เพื่อให้ Python อ่านภาษาไทยได้ถูกต้อง

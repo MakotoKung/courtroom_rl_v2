@@ -58,11 +58,25 @@ class BaseDialogueScene(BaseScene):
                 self.current_bg = pygame.transform.scale(
                     pygame.image.load(bg_path).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT)
                 )
+            else:
+                self.current_bg = None
             
             # 2. ตั้งค่าบทพูดและผู้พูด
             speaker = data.get("speaker", "")
             text = data.get("text", "")
             self.textbox.set_text(speaker, text)
+
+            # 3. เล่นเสียงประกอบ (ถ้ามีระบุไว้ใน JSON)
+            if "sound" in data and data["sound"]:
+                sound_path = data["sound"]
+                if os.path.exists(sound_path):
+                    try:
+                        sound_effect = pygame.mixer.Sound(sound_path)
+                        sound_effect.play()  # สั่งเล่นเสียงทันทีที่เปลี่ยนมาถึงประโยคนี้
+                    except Exception as e:
+                        print(f"Error loading/playing sound {sound_path}: {e}")
+                else:
+                    print(f"Warning: Sound file not found -> {sound_path}")
             
             # ---> 3. จัดการว่าใครควรแสดงบนจอในบรรทัดนี้ <---
             # ถ้าระบุ "visible": ["Judge", "Phoenix"] มาในสคริปต์ ให้แสดงตามนั้น
@@ -114,6 +128,7 @@ class BaseDialogueScene(BaseScene):
                 from scenes.menu_scene import MenuScene
                 self.app.change_scene(MenuScene(self.app))
                 '''
+        # 1. ถ้าหน้าต่าง Evidence เปิดอยู่ ให้ส่ง Event ไปที่เมนูหลักฐานก่อน
         if self.evidence_menu.is_open:
             chosen_id = self.evidence_menu.handle_event(event)
             if chosen_id is not None:
@@ -122,31 +137,35 @@ class BaseDialogueScene(BaseScene):
 
         # 2. กดปุ่ม TAB เพื่อเปิด/ปิดหน้าต่างหลักฐาน
         if event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
-            # === [จุดที่แก้] ให้เช็คสถานะจากเนื้อเรื่องปัจจุบันได้เลย ===
-            # ถ้าฉากนี้กำลังรอคำตอบหลักฐานอยู่ (waiting_for_evidence = True) 
-            # เปิดมาใหม่ก็ยังจะ "ยื่นได้" (can_present = True) เหมือนเดิม
-            # แต่ถ้าเป็นบทพูดทั่วไป เปิดมาดูก็จะเป็น "โหมดดูข้อมูล" (can_present = False)
             self.evidence_menu.can_present = self.waiting_for_evidence
-            
             self.evidence_menu.toggle()
             return
 
-        # 3. จัดการปุ่ม Spacebar ตามปกติ
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if not self.textbox.is_finished:
-                    self.textbox.skip_to_end()
+        # 3. จัดการปุ่ม Spacebar (ป้องกันการกดรัวที่ทำให้ Typewriter สะดุด)
+        is_action_triggered = False
+
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            is_action_triggered = True
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # ปุ่ม 1 คือคลิกซ้าย
+            is_action_triggered = True
+
+        if is_action_triggered:
+            # ถ้าตัวหนังสือกำลังพิมพ์อยู่ (ยังไม่จบ) ให้สั่งข้ามมาแสดงผลจนจบก่อนทันที
+            if not self.textbox.is_finished:
+                self.textbox.skip_to_end()
+            else:
+                # แต่ถ้าตัวหนังสือแสดงครบถ้วนแล้ว ถึงจะยอมให้เปลี่ยนสถานะหรือเปลี่ยนบรรทัดถัดไป
+                if self.waiting_for_evidence:
+                    if not self.evidence_menu.is_open:
+                        self.evidence_menu.can_present = True
+                        self.evidence_menu.toggle()
                 else:
-                    if self.waiting_for_evidence:
-                        if not self.evidence_menu.is_open:
-                            self.evidence_menu.can_present = True
-                            self.evidence_menu.toggle()
-                    else:
-                        self.current_index += 1
-                        self.update_dialogue_state()
-            elif event.key == pygame.K_ESCAPE:
-                from scenes.menu_scene import MenuScene
-                self.app.change_scene(MenuScene(self.app))
+                    self.current_index += 1
+                    self.update_dialogue_state()
+                        
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            from scenes.menu_scene import MenuScene
+            self.app.change_scene(MenuScene(self.app))
 
     def update(self, dt_ms):
         self.textbox.update(dt_ms)
