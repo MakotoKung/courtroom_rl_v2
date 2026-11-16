@@ -10,6 +10,7 @@ class BaseDialogueScene(BaseScene):
     def __init__(self, app):
         super().__init__(app)
 
+
         self.player_evidence_db = []
         evidence_path = "evidence.json"
         
@@ -35,6 +36,22 @@ class BaseDialogueScene(BaseScene):
         self.image_pos = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 40)
         self.current_visible_chars = []
 
+        self.is_game_over = False
+        self.waiting_for_evidence = False
+        self.correct_evidence_target = ""
+        self.jump_on_correct = 0
+        self.jump_on_wrong = 0
+            
+        # ระบบ HP (มี HP เต็ม 5 หน่วย / แบ่งเป็น 5 ช่อง ช่องละ 1 หน่วย)
+        self.max_hp = 5
+        self.current_hp = 5
+        self.game_over_jump_index = 109
+        self.waiting_game_over_delay = False
+        self.game_over_timer = 0
+        self.show_menu_button = False
+        # กำหนดขนาดและตำแหน่งของปุ่มกลับหน้าเมนู
+        self.menu_button_rect = pygame.Rect(SCREEN_WIDTH // 2 - 120, SCREEN_HEIGHT // 2 + 40, 240, 50)
+
     def add_character(self, name, animator_obj, x, y):
         self.characters[name] = {
             "animator": animator_obj,
@@ -49,6 +66,12 @@ class BaseDialogueScene(BaseScene):
             self.update_dialogue_state()
 
     def update_dialogue_state(self):
+        if  self.is_game_over and self.current_index == 108:
+            print("Happy End completed (Reached 107 limit). Returning to MenuScene...")
+            from scenes.menu_scene import MenuScene
+            self.app.change_scene(MenuScene(self.app))
+            return
+
         if self.current_index < len(self.dialogue_list):
             data = self.dialogue_list[self.current_index]
             
@@ -61,10 +84,24 @@ class BaseDialogueScene(BaseScene):
             else:
                 self.current_bg = None
             
+            self.render_textbox = data.get("show_textbox", True)
             # 2. ตั้งค่าบทพูดและผู้พูด
             speaker = data.get("speaker", "")
             text = data.get("text", "")
             self.textbox.set_text(speaker, text)
+
+            self.waiting_for_evidence = data.get("expects_evidence", False)
+            if self.waiting_for_evidence:
+                self.correct_evidence_target = data.get("correct_evidence_id", "")
+                self.jump_on_correct = data.get("on_correct_jump", self.current_index + 1)
+                self.jump_on_wrong = data.get("on_wrong_jump", self.current_index + 1)
+                # สามารถกำหนด "game_over_jump" ไว้ใน JSON ได้ ถ้าไม่ใส่จะใช้ค่า default เป็น jump_on_wrong
+                self.game_over_jump_index = data.get("game_over_jump", -1)
+                
+                if not self.evidence_menu.is_open:
+                    self.evidence_menu.can_present = True
+                    self.evidence_menu.toggle()
+
 
             # 3. เล่นเสียงประกอบ (ถ้ามีระบุไว้ใน JSON)
             if "sound" in data and data["sound"]:
@@ -111,23 +148,70 @@ class BaseDialogueScene(BaseScene):
         else:
             self.on_dialogue_finish()
 
+
+    def process_evidence_choice(self, chosen_id):
+        if chosen_id == self.correct_evidence_target:
+            print("CORRECT EVIDENCE! (Happy End path)")
+            self.is_game_over = False  # ยืนยันว่าเลือดไม่หมด เป็นเส้นทางปกติ
+            self.current_index = self.jump_on_correct
+        else:
+            print("WRONG EVIDENCE! HP -2")
+            self.current_hp = max(0, self.current_hp - 2)
+            
+            # ตรวจสอบว่า HP หมดหรือยัง (<= 0)
+            if self.current_hp <= 0:
+                print("HP Depleted! Bad End -> Jump to 107")
+                self.is_game_over = True     # เปิดสถานะ Game Over (Bad End)
+                self.current_index = 107     # บังคับกระโดดไป 107 ทันที
+            else:
+                self.current_index = self.jump_on_wrong
+            
+        self.waiting_for_evidence = False
+        self.update_dialogue_state()
+
+    def draw_hp_bar(self, surface):
+        max_slots = 5
+        slot_width = 32
+        slot_height = 16
+        spacing = 6
+        
+        # คำนวณตำแหน่ง X ให้อยู่มุมขวาบน
+        start_x = SCREEN_WIDTH - (max_slots * (slot_width + spacing)) - 30
+        start_y = 25
+        
+        for i in range(max_slots):
+            slot_x = start_x + i * (slot_width + spacing)
+            slot_rect = pygame.Rect(slot_x, start_y, slot_width, slot_height)
+            
+            # วาดกรอบช่อง HP (ช่องที่ว่าง / เลือดลดแล้ว)
+            pygame.draw.rect(surface, (20, 30, 50, 220), slot_rect, border_radius=3)
+            pygame.draw.rect(surface, (90, 110, 140), slot_rect, 1, border_radius=3)
+            
+            # วาดสีฟ้าในช่อง ถ้า i น้อยกว่าค่า HP ปัจจุบัน (พิกัด HP ช่องละ 1 หน่วย รวม 5 ช่อง)
+            if i < self.current_hp:
+                fill_rect = slot_rect.inflate(-4, -4)
+                pygame.draw.rect(surface, (50, 150, 255), fill_rect, border_radius=2) # สีฟ้าสด
+
     def on_dialogue_finish(self):
-        pass
+        if self.is_game_over:
+            # ถ้าเป็น Bad End (107) จบลง ให้เริ่มเข้าสู่โหมดดีเลย์ 5 วินาทีรอแสดงปุ่ม
+            self.waiting_game_over_delay = True
+        else:
+            # ถ้าเป็น Happy End จบลง (หรือหมดสคริปต์ปกติ) ให้กลับหน้า Menu ทันที
+            print("Dialogue finished (Happy End). Returning to MenuScene...")
+            from scenes.menu_scene import MenuScene
+            self.app.change_scene(MenuScene(self.app))
+        
 
     def handle_event(self, event):
-        '''
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if not self.textbox.is_finished:
-                    self.textbox.skip_to_end()
-                else:
-                    self.current_index += 1
-                    self.update_dialogue_state()
-                    
-            elif event.key == pygame.K_ESCAPE:
+        if self.show_menu_button and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.menu_button_rect.collidepoint(event.pos):
                 from scenes.menu_scene import MenuScene
                 self.app.change_scene(MenuScene(self.app))
-                '''
+                return
+        if self.waiting_game_over_delay:
+            return
+        
         # 1. ถ้าหน้าต่าง Evidence เปิดอยู่ ให้ส่ง Event ไปที่เมนูหลักฐานก่อน
         if self.evidence_menu.is_open:
             chosen_id = self.evidence_menu.handle_event(event)
@@ -146,22 +230,34 @@ class BaseDialogueScene(BaseScene):
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             is_action_triggered = True
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # ปุ่ม 1 คือคลิกซ้าย
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # คลิกซ้าย
+            # ป้องกันไม่ให้คลิกซ้ายทำงานซ้อนทับถ้าเมาส์คลิกโดนพื้นที่นอก Textbox หรือขณะเมนูเปิดอยู่
             is_action_triggered = True
 
         if is_action_triggered:
-            # ถ้าตัวหนังสือกำลังพิมพ์อยู่ (ยังไม่จบ) ให้สั่งข้ามมาแสดงผลจนจบก่อนทันที
+            # ถ้าตัวหนังสือกำลังพิมพ์อยู่ ให้เร่งให้พิมพ์จบก่อน
+            current_data = self.dialogue_list[self.current_index]
             if not self.textbox.is_finished:
                 self.textbox.skip_to_end()
             else:
-                # แต่ถ้าตัวหนังสือแสดงครบถ้วนแล้ว ถึงจะยอมให้เปลี่ยนสถานะหรือเปลี่ยนบรรทัดถัดไป
+                
+                
+                # ถ้ากำลังรอหลักฐานอยู่ ให้สลับไปเปิดหน้าต่างหลักฐานแทนการเปลี่ยนบรรทัด
                 if self.waiting_for_evidence:
                     if not self.evidence_menu.is_open:
                         self.evidence_menu.can_present = True
                         self.evidence_menu.toggle()
+                elif "next_jump" in current_data:
+                    self.current_index = current_data["next_jump"]
+                
                 else:
+                    # ขยับไปประโยคถัดไปอย่างถูกต้อง
                     self.current_index += 1
-                    self.update_dialogue_state()
+                    # เช็คความปลอดภัยไม่ให้ index เกินจำนวนบทพูดที่มี
+                    if self.current_index < len(self.dialogue_list):
+                        self.update_dialogue_state()
+                    else:
+                        self.on_dialogue_finish()
                         
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             from scenes.menu_scene import MenuScene
@@ -171,6 +267,11 @@ class BaseDialogueScene(BaseScene):
         self.textbox.update(dt_ms)
         for char_data in self.characters.values():
             char_data["animator"].update(dt_ms)
+
+        if self.waiting_game_over_delay and not self.show_menu_button:
+            self.game_over_timer += dt_ms
+            if self.game_over_timer >= 2000:  # ครบ 5 วินาที (5000 ms)
+                self.show_menu_button = True
 
     def draw(self, surface):
         if self.current_bg:
@@ -189,5 +290,22 @@ class BaseDialogueScene(BaseScene):
             img_rect = self.current_dialogue_image.get_rect(center=self.image_pos)
             surface.blit(self.current_dialogue_image, img_rect)
         
-        self.textbox.draw(surface)
+        if self.render_textbox:
+            self.textbox.draw(surface)
+        self.draw_hp_bar(surface)
         self.evidence_menu.draw(surface, self.app.font_sm, self.app.font_md)
+
+        if self.show_menu_button:
+            # วาดเลเยอร์สีดำโปร่งแสงทับหน้าจอ
+            overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+            overlay.fill((0, 0, 0, 180))
+            surface.blit(overlay, (0, 0))
+
+            # วาดปุ่ม Return to Menu
+            pygame.draw.rect(surface, (30, 40, 60), self.menu_button_rect, border_radius=8)
+            pygame.draw.rect(surface, (50, 150, 255), self.menu_button_rect, 2, border_radius=8)
+            
+            btn_font = pygame.font.SysFont(None, 24)
+            btn_text = btn_font.render("Return to Menu", True, (255, 255, 255))
+            text_rect = btn_text.get_rect(center=self.menu_button_rect.center)
+            surface.blit(btn_text, text_rect)

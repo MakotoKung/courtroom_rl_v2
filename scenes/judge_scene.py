@@ -10,9 +10,16 @@ class judge(BaseDialogueScene):
     def __init__(self, app):
         super().__init__(app)
         
+        pygame.mixer.stop() #stop Souund before play new Sound
+        pygame.mixer.music.stop()
+        self.ost = pygame.mixer.Sound("assets/sounds/aceOST.mp3")
+        self.ost.set_volume(0.05)
+        self.ost.play(-1)  # Play the OST on loop
+
         # 1. ลงทะเบียนและตั้งค่าตัวละครที่ใช้ในฉากนี้
         judge_anim = CharacterAnimator(char_name="Judge")
         judge_anim.add_action("talking", "assets/images/judge/judge_talk.png", total_frames=5,duration=200, custom_width=120, custom_height=150)
+        judge_anim.add_action("no", "assets/images/judge/judge_no.png", total_frames=8, duration=200, custom_width=122, custom_height=100)
         judge_anim.play_ani("talking", loop=True)
         judge_anim.set_scale(4)
         
@@ -91,55 +98,6 @@ class judge(BaseDialogueScene):
                     self.evidence_menu.toggle()
 
 
-    def handle_event(self, event):
-        # ถ้าเปิดหน้าต่าง Evidence เมนูกลางอยู่ ให้ส่ง Event ไปที่ EvidenceMenu ก่อน
-        if self.evidence_menu.is_open:
-            chosen_id = self.evidence_menu.handle_event(event)
-            if chosen_id is not None:
-                self.process_evidence_choice(chosen_id)
-            return
-        '''
-        # กดปุ่ม TAB เพื่อเปิดดูหลักฐานสำหรับการ Test
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
-            self.evidence_menu.toggle()
-            return
-        super().handle_event(event)
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            if self.textbox.is_finished and self.waiting_for_evidence:
-                self.evidence_menu.toggle()
-        '''
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
-            self.evidence_menu.can_present = False  # <--- ถ้ากด TAB เอง จะถูกเซ็ตเป็น False (ห้ามยื่น)
-            self.evidence_menu.toggle()
-            return
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if not self.textbox.is_finished:
-                    self.textbox.skip_to_end()
-                else:
-                    if self.waiting_for_evidence:
-                        if not self.evidence_menu.is_open:
-                            self.evidence_menu.can_present = True  # <--- [จุดที่ 2] เปลี่ยนเป็น True ตรงนี้ (กดเปิดตอนถึงคำถาม)
-                            self.evidence_menu.toggle()
-                    else:
-                        self.current_index += 1
-                        self.update_dialogue_state()
-        # จัดการปุ่มกดปกติของ Scene
-        super().handle_event(event)
-
-    def process_evidence_choice(self, chosen_id):
-        print(f"Player presented evidence ID: {chosen_id}")
-        if chosen_id == self.correct_evidence_target:
-            print("CORRECT EVIDENCE!")
-            self.current_index = self.jump_on_correct
-        else:
-            print("WRONG EVIDENCE!")
-            self.current_index = self.jump_on_wrong
-            
-        self.waiting_for_evidence = False
-        self.update_dialogue_state()
-
 
     def draw(self, surface):
         super().draw(surface)  # วาดฉากหลัง, ตัวละคร, และ Textbox ตามปกติ
@@ -147,6 +105,10 @@ class judge(BaseDialogueScene):
     
     def on_dialogue_finish(self):
         """เมื่อบทพูดในหน้านี้จบลงทั้งหมด จะสลับไป Scene ถัดไปอัตโนมัติ"""
+        if self.is_game_over:
+            super().on_dialogue_finish()
+            return
+        
         print("บทสนทนาหน้า Judge จบแล้ว กำลังเปลี่ยน Scene ไปหน้า Evidence...")
         from scenes.grave import GavelScene
         self.app.change_scene(GavelScene(self.app))

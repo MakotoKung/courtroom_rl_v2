@@ -61,6 +61,7 @@ class AceAttorneyApp:
 
     def change_scene(self, new_scene):
         """ฟังก์ชันสลับฉาก (Scene Transition)"""
+        
         if self.current_scene:
             self.current_scene.on_exit()
         self.current_scene = new_scene

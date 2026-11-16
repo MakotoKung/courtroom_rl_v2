@@ -3,6 +3,7 @@ import pygame
 from config import *
 from ui import Button
 from scenes.base_scene import BaseScene
+from sound import SoundManager
 
 class GavelAnimator:
     """คลาสจัดการตัดเฟรมแบบกำหนดขนาดเอง, มีระบบปรับ Gap ระหว่างเฟรม, ลบ Green Screen และ Scale"""
@@ -90,8 +91,17 @@ class GavelScene(BaseScene):
         super().__init__(app)
         
         # ใส่ Path รูปภาพ Sprite Sheet ของคุณตรงนี้
-        gavel_path = "assets/images/hammer/gavel.png"  
+        gavel_path = "assets/images/hammer/gavel.png" 
         
+        if not pygame.mixer.get_init():
+            pygame.mixer.init()
+
+        # โหลดไฟล์เสียงเก็บไว้ในตัวแปรปกติ
+        try:
+            self.click_sound = pygame.mixer.Sound("assets/sounds/se010(Gavel Slam).wav")  # เปลี่ยน path ตามไฟล์จริง
+        except Exception as e:
+            print(f"โหลดเสียงไม่สำเร็จ: {e}")
+            self.click_sound = None
         # กำหนดค่าพารามิเตอร์ต่างๆ ตรงนี้:
         # - frame_w=256, frame_h=191 ตามต้องการ
         # - gap: ถ้ามีเส้นแบ่งหรือขอบเกิน ให้ปรับเพิ่ม/ลดค่านี้ เช่น 1, 2, 4 เพื่อ Optimize การตัดภาพ
@@ -131,7 +141,7 @@ class GavelScene(BaseScene):
             from scenes.menu_scene import MenuScene
             self.app.change_scene(MenuScene(self.app))
             return
-
+        self.click_sound.play()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 from scenes.menu_scene import MenuScene
@@ -142,15 +152,19 @@ class GavelScene(BaseScene):
     def update(self, dt_ms):
         self.gavel_anim.update(dt_ms)
         if self.gavel_anim.timer >= 1000: 
-                    from scenes.judge_scene import judge
-                    self.app.change_scene(judge(self.app))
+            
+            from scenes.judge_scene import judge
+            self.app.change_scene(judge(self.app))
 
     def draw(self, surface):
         surface.fill(DARK_BG)  
+        print("ตรวจสอบไฟล์เสียง:", self.click_sound)
         
         # วาดแอนิเมชันกลางจอ
         self.gavel_anim.draw(surface, self.pos_x, self.pos_y)
+        
         if self.gavel_anim.is_finished: 
+            self.click_sound.play()
             from scenes.judge_scene import judge
             self.app.change_scene(judge(self.app))
 

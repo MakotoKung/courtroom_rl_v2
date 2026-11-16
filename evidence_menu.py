@@ -14,10 +14,10 @@ class EvidenceMenu:
         self.title_font = pygame.font.Font("assets/fonts/TorsilpThamnganMangThoe.ttf", 30) # ฟอนต์ชื่อใหญ่
         self.desc_font = pygame.font.Font("assets/fonts/TorsilpThamnganMangThoe.ttf", 24)  # ฟอนต์รายละเอียด
 
-        # โหลด Asset พื้นหลัง UI หลัก (recordu.png)
+        # โหลด Asset พื้นหลัง UI หลัก (recordnew.png)
         self.bg_panel = None
-        if os.path.exists("assets/images/recordu.png"):
-            img = pygame.image.load("assets/images/recordu.png").convert_alpha()
+        if os.path.exists("assets/images/recordnew.png"):
+            img = pygame.image.load("assets/images/recordnew.png").convert_alpha()
             self.bg_panel = pygame.transform.scale(img, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
     def toggle(self):

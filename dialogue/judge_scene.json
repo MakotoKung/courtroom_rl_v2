@@ -62,7 +62,7 @@
         "visible": [
             "Payne"
         ],
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             300
@@ -75,7 +75,7 @@
         "visible": [
             "Payne"
         ],
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             300
@@ -88,7 +88,7 @@
         "visible": [
             "Judge"
         ]
-    },
+    },    
     {
         "bg": "assets/images/bg002.png",
         "speaker": "Payne",
@@ -96,7 +96,7 @@
         "visible": [
             "Payne"
         ],
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             300
@@ -149,7 +149,7 @@
         "visible": [
             "Payne"
         ],
-        "image": "assets/images/P2.png",
+        "image": "assets/images/2.png",
         "pos": [
             300,
             250
@@ -313,7 +313,7 @@
         "visible": [
             "Payne"
         ],
-        "image": "assets/images/P3.png",
+        "image": "assets/images/3.png",
         "pos": [
             300,
             250
@@ -353,15 +353,14 @@
         "expects_evidence": true,
         "correct_evidence_id": "ใบวินิจฉัย",
         "on_correct_jump": 42,
-        "on_wrong_jump": 51
+        "on_wrong_jump": 109
     },
     {
         "bg": "assets/images/bg003.png",
-        "speaker": "Frank",
-        "text": "",
         "visible": [
             "Frank"
         ],
+        "show_textbox": false,
         "image": "assets/images/etc00au.png",
         "size": [
             1000,
@@ -409,11 +408,11 @@
     },
     {
         "bg": "assets/images/bg003.png",
-        "speaker": "Frank",
         "text": "",
         "visible": [
             "Frank"
         ],
+        "show_textbox": false,
         "image": "assets/images/etc00au.png",
         "size": [
             1000,
@@ -440,7 +439,8 @@
         "text": "สิ่งนี้ยากเกินที่จะเชื่อนะ อัยการ",
         "visible": [
             "Judge"
-        ]
+        ],
+        "action": "talking"
     },
     {
         "bg": "assets/images/bg003.png",
@@ -484,15 +484,14 @@
         "expects_evidence": true,
         "correct_evidence_id": "electric",
         "on_correct_jump": 55,
-        "on_wrong_jump": 62
+        "on_wrong_jump": 110
     },
     {
         "bg": "assets/images/bg003.png",
-        "speaker": "Frank",
-        "text": "",
         "visible": [
             "Frank"
         ],
+        "show_textbox": false,
         "image": "assets/images/etc00au.png",
         "size": [
             1000,
@@ -530,7 +529,7 @@
             "Phoenix"
         ],
         "action": "paper",
-        "image": "assets/images/P3.png",
+        "image": "assets/images/3.png",
         "pos": [
             11000,
             250
@@ -542,7 +541,8 @@
         "text": "จริงด้วย พยานมีอะไรจากอธิบายไหม",
         "visible": [
             "Judge"
-        ]
+        ],
+        "action": "talking"
     },
     {
         "bg": "assets/images/bg003.png",
@@ -578,8 +578,7 @@
     },
     {
         "bg": "assets/images/bg003.png",
-        "speaker": "Frank",
-        "text": "",
+        "show_textbox": false,
         "visible": [
             "Frank"
         ],
@@ -591,7 +590,8 @@
         "pos": [
             600,
             350
-        ]
+        ],
+        "sound": "assets/sounds/holdit.mp3"
     },
     {
         "bg": "assets/images/bg001.png",
@@ -605,19 +605,19 @@
     {
         "bg": "assets/images/bg003.png",
         "speaker": "Frank",
-        "text": "ใช้ครับ มันคืออาวุธที่สังหาเหยื่อ",
+        "text": "ใช่ครับ มันคืออาวุธที่สังหาเหยื่อ",
         "visible": [
             "Frank"
         ],
         "expects_evidence": true,
         "correct_evidence_id": "autopsy_report",
         "on_correct_jump": 67,
-        "on_wrong_jump": 62
+        "on_wrong_jump": 111,
+        "game_over_jump": 107
     },
     {
         "bg": "assets/images/bg003.png",
-        "speaker": "Frank",
-        "text": "",
+        "show_textbox": false,
         "visible": [
             "Frank"
         ],
@@ -653,12 +653,21 @@
     {
         "bg": "assets/images/bg002.png",
         "speaker": "Payne",
+        "text": "ศาลที่เคารพ ผมขออนุญาต",
+        "visible": [
+            "Payne"
+        ],
+        "action": "hah"
+    },
+    {
+        "bg": "assets/images/bg002.png",
+        "speaker": "Payne",
         "text": "ตามที่ทนายบอกครับ รูปปั้นนั้นเป้นนาฬิกาจริงๆ",
         "visible": [
             "Payne"
         ],
         "action": "hah",
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             250
@@ -672,7 +681,7 @@
             "Payne"
         ],
         "action": "hah",
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             250
@@ -686,7 +695,7 @@
             "Payne"
         ],
         "action": "hah",
-        "image": "assets/images/P1.png",
+        "image": "assets/images/1.png",
         "pos": [
             300,
             250
@@ -801,12 +810,13 @@
         "action": "angry",
         "expects_evidence": true,
         "correct_evidence_id": "picture",
-        "on_correct_jump": 85,
-        "on_wrong_jump": 90
+        "on_correct_jump": 86,
+        "on_wrong_jump": 112,
+        "game_over_jump": 107
     },
     {
         "bg":"assets/images/bg003.png",
-        "speaker":"Frank",
+        "show_textbox": false,
         "visible":["Frank"],
         "image":"assets/images/etc00au.png",
         "size":[1000, 700 ],
@@ -833,11 +843,12 @@
     },
     {
         "bg":"assets/images/bg003.png",
-        "speaker":"Frank",
+        "show_textbox": false,
         "visible":["Frank"],
         "image":"assets/images/etc00bu.png",
         "size":[1000, 700 ],
-        "pos":[600,350]
+        "pos":[600,350],
+        "sound": "assets/sounds/holdit.mp3"
         
     },
     {
@@ -865,7 +876,7 @@
         "visible": [
             ""
         ],
-        "image":"assets/images/P1.png",
+        "image":"assets/images/1.png",
         "pos":[300,300]
     },
     {
@@ -875,7 +886,7 @@
         "visible": [
             ""
         ],
-        "image":"assets/images/P1.png",
+        "image":"assets/images/1.png",
         "pos":[300,300]
     },
     {
@@ -884,7 +895,8 @@
         "text": "โอเค เราได้ยินเสียงนาฬิกาแล้ว แล้วยังไงต่อคุณทนาย",
         "visible": [
             "Judge"
-        ]
+        ],
+        "action": "talking"
     },
     {
         "bg": "assets/images/bg001.png",
@@ -927,13 +939,17 @@
         "expects_evidence": true,
         "correct_evidence_id": "passport",
         "on_correct_jump": 100,
-        "on_wrong_jump": 103
+        "on_wrong_jump": 113,
+        "game_over_jump": 107
     },
     {
         "bg":"assets/images/bg003.png",
-        "speaker":"Frank",
+        "show_textbox":false,
         "visible":["Frank"],
         "action":"talking",
+        "image":"assets/images/etc00au.png",
+        "size":[1000, 700 ],
+        "pos":[600,350],
         "sound":"assets/sounds/objection.mp3"
     },
     {
@@ -961,7 +977,8 @@
         "bg":"assets/images/judge/bg004.png",
         "speaker":"Judge",
         "text":"เอาล่ะ ฉันว่าแค่นี้ก้น่าจะพิสูจน์ได้แล้วล่ะ",
-        "visible":["Judge"]
+        "visible":["Judge"],
+        "action": "talking"
     },
     {
         "bg":"assets/images/judge/bg004.png",
@@ -970,11 +987,59 @@
         "visible":["Judge"]
     },
     {
+        "bg":"assets/images/judge/image.png",
+        "text":"ไม่มีความผิด"
+    },
+    {
+        "bg":"assets/images/judge/Guilty.png",
+        "text":"คุณแอน อเมริกาโนฉด มีความผิด"
+    },
+    { "_comment":"ตั้งแต่อันนี้จะไม่มีอะไรข้ามมาได้ถ้าไม่มาด้วยวิธีปกติ"},
+    {
         "bg":"assets/images/judge/bg004.png",
         "speaker":"Judge",
-        "text":"เอาล่ะ ฉันว่าแค่นี้ก้น่าจะพิสูจน์ได้แล้วล่ะ",
-        "visible":["Judge"]
+        "text":"หลักฐานที่ยื่นไม่เกี่ยวข้อง ปัดตก",
+        "visible":["Judge"],
+        "action":"no",
+        "next_jump": 50
+    },
+    {
+        "bg":"assets/images/judge/bg004.png",
+        "speaker":"Judge",
+        "text":"หลักฐานที่ยื่นไม่เกี่ยวข้อง ปัดตก",
+        "visible":["Judge"],
+        "action":"no",
+        "next_jump": 61
+    },
+    {
+        "bg":"assets/images/judge/bg004.png",
+        "speaker":"Judge",
+        "text":"หลักฐานที่ยื่นไม่เกี่ยวข้อง ปัดตก",
+        "visible":["Judge"],
+        "action":"no",
+        "next_jump": 70
+    },
+    {
+        "bg":"assets/images/judge/bg004.png",
+        "speaker":"Judge",
+        "text":"หลักฐานที่ยื่นไม่เกี่ยวข้อง ปัดตก",
+        "visible":["Judge"],
+        "action":"no",
+        "next_jump": 91
+    },
+    {
+        "bg":"assets/images/judge/bg004.png",
+        "speaker":"Judge",
+        "text":"หลักฐานที่ยื่นไม่เกี่ยวข้อง ปัดตก",
+        "visible":["Judge"],
+        "action":"no",
+        "next_jump": 103
     }
+    
+    
+
+    
+    
     
 
 
