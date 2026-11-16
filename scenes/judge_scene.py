@@ -17,48 +17,48 @@ class judge(BaseDialogueScene):
         self.ost.play(-1)  # Play the OST on loop
 
         # 1. ลงทะเบียนและตั้งค่าตัวละครที่ใช้ในฉากนี้
-        judge_anim = CharacterAnimator(char_name="Judge")
+        judge_anim = CharacterAnimator(char_name="ผู้พิพากษา")
         judge_anim.add_action("talking", "assets/images/judge/judge_talk.png", total_frames=5,duration=200, custom_width=120, custom_height=150)
         judge_anim.add_action("no", "assets/images/judge/judge_no.png", total_frames=8, duration=200, custom_width=122, custom_height=100)
         judge_anim.play_ani("talking", loop=True)
         judge_anim.set_scale(4)
         
         # 2. เพิ่มตัวละครเข้าสู่ระบบพร้อมกำหนดพิกัด x และ y ตรงนี้ได้เลย!
-        self.add_character("Judge", judge_anim, x=400, y=SCREEN_HEIGHT - 550)
+        self.add_character("ผู้พิพากษา", judge_anim, x=400, y=SCREEN_HEIGHT - 550)
 
-        payne_anim = CharacterAnimator(char_name="Payne")
+        payne_anim = CharacterAnimator(char_name="อัยการปีศาจดา")
         payne_anim.add_action("talking", "assets/images/payne/payne_talk.png",total_frames=5,duration=130,custom_width=93)
         payne_anim.add_action("hah", "assets/images/payne/payne_hah.png",total_frames=4,duration=200,custom_width=115,custom_height=120)
         payne_anim.play_ani("talking",loop=True)
         payne_anim.set_scale(4)
-        self.add_character("Payne", payne_anim, x=800, y= SCREEN_HEIGHT - 480)
+        self.add_character("อัยการปีศาจดา", payne_anim, x=800, y= SCREEN_HEIGHT - 480)
 
-        phoenix_ani = CharacterAnimator(char_name="Phoenix")
+        phoenix_ani = CharacterAnimator(char_name="ทนายแตน")
         phoenix_ani.add_action("talking", "assets/images/phoenix/Phoenix_talk.png",total_frames=4, duration=130, custom_width=135)
         phoenix_ani.add_action("paper", "assets/images/phoenix/Phoenix_paper2.png",total_frames=6, duration=220, custom_width=180)
         phoenix_ani.add_action("finger", "assets/images/phoenix/Phoenix_finger.png",total_frames=1, duration=100, custom_width=260)
         phoenix_ani.play_ani("talking", loop=True)
         phoenix_ani.set_scale(4)
-        self.add_character("Phoenix", phoenix_ani, x=200, y= SCREEN_HEIGHT-500)
+        self.add_character("ทนายแตน", phoenix_ani, x=200, y= SCREEN_HEIGHT-500)
 
-        larry  = CharacterAnimator(char_name="Larry")
+        larry  = CharacterAnimator(char_name="แอน อเมริกาโนฉด")
         larry.add_action("talking","assets/images/larry/larry_talk.png",total_frames=4,duration=250,custom_width=170 ,custom_height=185)
         larry.add_action("emm", "assets/images/larry/larry_emm.png",total_frames=1)
         larry.play_ani("talking",loop=True)
         larry.set_scale(4)
-        self.add_character("Larry",larry,x= 300, y= SCREEN_HEIGHT - 500)
+        self.add_character("แอน อเมริกาโนฉด",larry,x= 300, y= SCREEN_HEIGHT - 500)
 
-        frank = CharacterAnimator(char_name="Frank")
+        frank = CharacterAnimator(char_name="ปอง")
         frank.add_action("talking", "assets/images/frank/frank_talk2.png",total_frames=4,duration=200,custom_width=102)
         frank.add_action("angry", "assets/images/frank/frank_angry.png",total_frames=4, duration=220, custom_width=110)
         frank.play_ani("talking",loop=True)
         frank.set_scale(4)
-        self.add_character("Frank",frank,x= 400, y= SCREEN_HEIGHT -500)
+        self.add_character("ปอง",frank,x= 400, y= SCREEN_HEIGHT -500)
         # 2. กำหนด Script บทพูดทั้งหมด (รองรับการสลับฉากหลัง bg ระหว่างคุยได้อิสระ)
         
-        clock = CharacterAnimator(char_name="Clock")
+        clock = CharacterAnimator(char_name="รูปปั้นครุ่นคิด")
         clock.add_action("talking", "assets/images/frank/frank_talk2.png",total_frames=4,duration=200,custom_width=102)
-        self.add_character("Clock",clock,x= 400, y= SCREEN_HEIGHT -500)
+        self.add_character("รูปปั้นครุ่นคิด",clock,x= 400, y= SCREEN_HEIGHT -500)
 
         
         script_path = "dialogue/judge_scene.json"

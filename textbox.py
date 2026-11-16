@@ -80,7 +80,7 @@ class Textbox:
 
         # 2. วาดกรอบชื่อผู้พูดและชื่อผู้พูด (โทนสีฟ้า)
         if self.speaker:
-            name_font = pygame.font.SysFont(None, 24)
+            name_font = GLOBAL_FONT
             name_surf = name_font.render(self.speaker, True, (255, 255, 255)) # ตัวหนังสือขาว
             
             # คำนวณขนาดกรอบชื่อผู้พูด
@@ -92,7 +92,7 @@ class Textbox:
             # วาดพื้นหลังกรอบชื่อผู้พูดสีฟ้า + ขอบขอบฟ้าอ่อน
             if self.name_bg_image:
                 scaled_name_bg = pygame.transform.scale(self.name_bg_image, (name_rect.width, name_rect.height))
-                surface.blit(scaled_name_bg, (name_rect.x, name_rect.y))
+                surface.blit(scaled_name_bg, (name_rect.x, name_rect.y +12))
             else:
             # ระบบสำรอง (ถ้าไม่ใส่รูป ให้ใช้วาดสี่เหลี่ยมสีเดิม)
                 pygame.draw.rect(surface, (30, 100, 180), name_rect, border_radius=6)     
