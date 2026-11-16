@@ -25,7 +25,7 @@ class MenuScene(BaseScene):
         self.logo_image = pygame.image.load("assets/images/title/logo_trans.png").convert_alpha()
         self.logo_image = pygame.transform.scale(self.logo_image, (400, 200))  # ปรับขนาดโลโก้ให้เหมาะสม
         
-        self.menu_items = ["Play", "AI Play", "Exit Game"]
+        self.menu_items = ["Play", "AI Play","Q-Table", "Exit Game"]
         self.buttons = []
         self.selected_index = 0
 
@@ -84,6 +84,9 @@ class MenuScene(BaseScene):
                     print("เปลี่ยนไปหน้า AI เล่นเกม...")
                     from scenes.ai_judge_scene import judge_ai
                     self.app.change_scene(judge_ai(self.app))
+                elif selected_text == "Q-Table":
+                    from scenes.qtable_scene import QTableScene
+                    self.app.change_scene(QTableScene(self.app))
         '''
         if self.btn_mode1.handle_event(event):
             from scenes.exidence_scene import exidence

@@ -96,6 +96,10 @@ class judge(BaseDialogueScene):
                 if not self.evidence_menu.is_open:
                     self.evidence_menu.can_present = True
                     self.evidence_menu.toggle()
+        if self.current_index == 108:
+            print("Happy End completed (Reached 107 limit). Returning to MenuScene...")
+            from scenes.menu_scene import MenuScene
+            self.app.change_scene(MenuScene(self.app))
 
 
 

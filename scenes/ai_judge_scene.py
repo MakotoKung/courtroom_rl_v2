@@ -13,9 +13,9 @@ MODEL_PATH = "Model/q_table.json"
 END_INDEX = 107
 
 # ดีเลย์ของ AI (ms)
-AI_LINE_DELAY = 200      #Defualt 1200 # รอหลังบทพูดพิมพ์จบ ก่อนไปประโยคถัดไป
-AI_THINK_DELAY = 500     #defautl 1500 # รอก่อนเลือกหลักฐาน
-AI_PRESENT_DELAY = 1200   # โชว์หลักฐานที่เลือกก่อนยื่น
+AI_LINE_DELAY = 50      #Defualt 1200 # รอหลังบทพูดพิมพ์จบ ก่อนไปประโยคถัดไป
+AI_THINK_DELAY = 10     #defautl 1500 # รอก่อนเลือกหลักฐาน
+AI_PRESENT_DELAY = 100   # โชว์หลักฐานที่เลือกก่อนยื่น
 
 
 class QAgent:

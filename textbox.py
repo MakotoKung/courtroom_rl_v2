@@ -33,7 +33,7 @@ class Textbox:
             self.typing_sound = None
 
         self.is_playing_sound = False
-        self.typing_sound.set_volume(0.1)
+        self.typing_sound.set_volume(0.05)
 
     def set_text(self, speaker, text):
         self.speaker = speaker

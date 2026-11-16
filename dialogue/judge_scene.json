@@ -988,13 +988,16 @@
     },
     {
         "bg":"assets/images/judge/image.png",
-        "text":"ไม่มีความผิด"
+        "text":"ไม่มีความผิด",
+        "is_happy_end": true
     },
     {
         "bg":"assets/images/judge/Guilty.png",
         "text":"คุณแอน อเมริกาโนฉด มีความผิด"
     },
-    { "_comment":"ตั้งแต่อันนี้จะไม่มีอะไรข้ามมาได้ถ้าไม่มาด้วยวิธีปกติ"},
+    { "_comment":"ตั้งแต่อันนี้จะไม่มีอะไรข้ามมาได้ถ้าไม่มาด้วยวิธีปกติ",
+        "bg":"assets/images/judge/image.png"},
+    
     {
         "bg":"assets/images/judge/bg004.png",
         "speaker":"Judge",

@@ -66,11 +66,16 @@ class BaseDialogueScene(BaseScene):
             self.update_dialogue_state()
 
     def update_dialogue_state(self):
-        if  self.is_game_over and self.current_index == 108:
+        if  not self.is_game_over and self.current_index == 108:
             print("Happy End completed (Reached 107 limit). Returning to MenuScene...")
             from scenes.menu_scene import MenuScene
             self.app.change_scene(MenuScene(self.app))
             return
+        elif  self.is_game_over and self.current_index == 108:
+                    print("Happy End completed (Reached 107 limit). Returning to MenuScene...")
+                    from scenes.menu_scene import MenuScene
+                    self.app.change_scene(MenuScene(self.app))
+                    return
 
         if self.current_index < len(self.dialogue_list):
             data = self.dialogue_list[self.current_index]
@@ -193,6 +198,8 @@ class BaseDialogueScene(BaseScene):
                 pygame.draw.rect(surface, (50, 150, 255), fill_rect, border_radius=2) # สีฟ้าสด
 
     def on_dialogue_finish(self):
+        self.ost.stop()
+        
         if self.is_game_over:
             # ถ้าเป็น Bad End (107) จบลง ให้เริ่มเข้าสู่โหมดดีเลย์ 5 วินาทีรอแสดงปุ่ม
             self.waiting_game_over_delay = True
@@ -240,8 +247,6 @@ class BaseDialogueScene(BaseScene):
             if not self.textbox.is_finished:
                 self.textbox.skip_to_end()
             else:
-                
-                
                 # ถ้ากำลังรอหลักฐานอยู่ ให้สลับไปเปิดหน้าต่างหลักฐานแทนการเปลี่ยนบรรทัด
                 if self.waiting_for_evidence:
                     if not self.evidence_menu.is_open:
@@ -249,7 +254,12 @@ class BaseDialogueScene(BaseScene):
                         self.evidence_menu.toggle()
                 elif "next_jump" in current_data:
                     self.current_index = current_data["next_jump"]
-                
+                # 3. เช็คว่าเป็นฉากจบ Happy End จริงๆ หรือไม่
+                elif current_data.get("is_happy_end", False) and not self.is_game_over:
+                    print("Happy End reached. Returning to MenuScene...")
+                    from scenes.menu_scene import MenuScene
+                    self.app.change_scene(MenuScene(self.app))
+                    return
                 else:
                     # ขยับไปประโยคถัดไปอย่างถูกต้อง
                     self.current_index += 1
